@@ -7,6 +7,7 @@ import { Menu, X, Gamepad2, Search } from 'lucide-react';
 const navItems = [
   { label: 'コンシューマ', href: '/category/console' },
   { label: 'アプリ', href: '/category/mobile' },
+  { label: '🎮 タイプ診断', href: '/diagnosis' },
   {
     label: '機種別',
     href: '#',
