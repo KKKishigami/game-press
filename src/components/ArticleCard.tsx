@@ -1,103 +1,114 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Article } from '@/types';
-import { categoryLabel, articleTypeLabel, articleTypeBadgeColor, formatDate } from '@/lib/utils';
+import { categoryLabel, articleTypeLabel, formatDate } from '@/lib/utils';
 
 interface Props {
   article: Article;
-  size?: 'large' | 'medium' | 'small';
+  size?: 'large' | 'medium' | 'small' | 'list';
 }
 
 export default function ArticleCard({ article, size = 'medium' }: Props) {
-  if (size === 'large') {
+  // リスト形式（サイドバー・ランキング向け）
+  if (size === 'list') {
     return (
-      <Link href={`/articles/${article.slug}`} className="group block">
-        <div className="relative rounded-2xl overflow-hidden bg-gray-900 border border-gray-800 hover:border-purple-500 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10">
-          <div className="relative h-64 w-full">
-            <Image
-              src={article.thumbnail}
-              alt={article.title}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent" />
-            <div className="absolute top-3 left-3 flex gap-2">
-              <span className={`text-xs font-bold px-2 py-1 rounded-full ${
-                article.category === 'console' ? 'bg-purple-500 text-white' : 'bg-cyan-500 text-white'
-              }`}>
-                {categoryLabel(article.category)}
-              </span>
-              <span className={`text-xs font-bold px-2 py-1 rounded-full ${articleTypeBadgeColor(article.type)}`}>
-                {articleTypeLabel(article.type)}
-              </span>
-            </div>
-          </div>
-          <div className="p-4">
-            <h2 className="text-white font-bold text-lg leading-snug mb-2 group-hover:text-purple-300 transition-colors line-clamp-2">
-              {article.title}
-            </h2>
-            <p className="text-gray-400 text-sm line-clamp-2 mb-3">{article.excerpt}</p>
-            <div className="flex items-center gap-2 text-gray-500 text-xs">
-              <span>{formatDate(article.publishedAt)}</span>
-              <span>•</span>
-              <span>{article.platforms.join(' / ')}</span>
-            </div>
-          </div>
+      <Link href={`/articles/${article.slug}`} className="group flex gap-2 py-2 border-b border-gray-200 last:border-0">
+        <div className="relative w-16 h-11 flex-shrink-0 bg-gray-200 overflow-hidden">
+          <Image
+            src={article.thumbnail}
+            alt={article.title}
+            fill
+            className="object-cover group-hover:opacity-80 transition-opacity"
+            sizes="64px"
+          />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-xs text-gray-700 font-medium line-clamp-2 leading-snug group-hover:text-[#cc0000] transition-colors">
+            {article.title}
+          </p>
+          <p className="text-[10px] text-gray-400 mt-0.5">{formatDate(article.publishedAt)}</p>
         </div>
       </Link>
     );
   }
 
+  // 小サイズ
   if (size === 'small') {
     return (
-      <Link href={`/articles/${article.slug}`} className="group flex gap-3 items-start">
-        <div className="relative w-20 h-14 flex-shrink-0 rounded-lg overflow-hidden bg-gray-800">
+      <Link href={`/articles/${article.slug}`} className="group flex gap-2 py-2 border-b border-gray-200 last:border-0">
+        <div className="relative w-20 h-14 flex-shrink-0 bg-gray-200 overflow-hidden">
           <Image
             src={article.thumbnail}
             alt={article.title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-cover group-hover:opacity-80 transition-opacity"
             sizes="80px"
           />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-white text-xs font-semibold line-clamp-2 leading-snug group-hover:text-purple-300 transition-colors">
+          <span className="inline-block text-[10px] font-bold text-white bg-[#cc0000] px-1.5 py-0.5 mb-1">
+            {categoryLabel(article.category)}
+          </span>
+          <p className="text-xs text-gray-700 font-medium line-clamp-2 leading-snug group-hover:text-[#cc0000] transition-colors">
             {article.title}
           </p>
-          <p className="text-gray-500 text-xs mt-1">{formatDate(article.publishedAt)}</p>
+          <p className="text-[10px] text-gray-400 mt-0.5">{formatDate(article.publishedAt)}</p>
         </div>
       </Link>
     );
   }
 
-  // medium (default)
-  return (
-    <Link href={`/articles/${article.slug}`} className="group block">
-      <div className="rounded-xl overflow-hidden bg-gray-900 border border-gray-800 hover:border-purple-500 transition-all duration-300 hover:shadow-md hover:shadow-purple-500/10">
-        <div className="relative h-44 w-full">
+  // 大サイズ（目玉記事）
+  if (size === 'large') {
+    return (
+      <Link href={`/articles/${article.slug}`} className="group block bg-white border border-gray-200 hover:border-[#cc0000] transition-colors">
+        <div className="relative w-full aspect-video bg-gray-200 overflow-hidden">
           <Image
             src={article.thumbnail}
             alt={article.title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
-            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover group-hover:opacity-90 transition-opacity"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 to-transparent" />
-          <div className="absolute top-2 left-2 flex gap-1.5">
-            <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-              article.category === 'console' ? 'bg-purple-500 text-white' : 'bg-cyan-500 text-white'
-            }`}>
-              {categoryLabel(article.category)}
-            </span>
+          <div className="absolute top-0 left-0 bg-[#cc0000] text-white text-xs font-bold px-2 py-1">
+            {articleTypeLabel(article.type)}
           </div>
         </div>
         <div className="p-3">
-          <h3 className="text-white font-semibold text-sm leading-snug mb-1 group-hover:text-purple-300 transition-colors line-clamp-2">
+          <h2 className="text-sm font-bold text-gray-800 line-clamp-2 leading-snug group-hover:text-[#cc0000] transition-colors mb-1">
             {article.title}
-          </h3>
-          <p className="text-gray-500 text-xs">{formatDate(article.publishedAt)}</p>
+          </h2>
+          <p className="text-xs text-gray-500 line-clamp-2 mb-2">{article.excerpt}</p>
+          <div className="flex items-center gap-2 text-[10px] text-gray-400">
+            <span>{formatDate(article.publishedAt)}</span>
+            <span className="bg-gray-100 px-1.5 py-0.5 text-gray-500">{article.platforms[0]}</span>
+          </div>
         </div>
+      </Link>
+    );
+  }
+
+  // medium（デフォルト）
+  return (
+    <Link href={`/articles/${article.slug}`} className="group block bg-white border border-gray-200 hover:border-[#cc0000] transition-colors">
+      <div className="relative w-full aspect-video bg-gray-200 overflow-hidden">
+        <Image
+          src={article.thumbnail}
+          alt={article.title}
+          fill
+          className="object-cover group-hover:opacity-90 transition-opacity"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+        <div className="absolute top-0 left-0 bg-[#cc0000] text-white text-[10px] font-bold px-1.5 py-0.5">
+          {categoryLabel(article.category)}
+        </div>
+      </div>
+      <div className="p-2">
+        <h3 className="text-xs font-bold text-gray-800 line-clamp-2 leading-snug group-hover:text-[#cc0000] transition-colors mb-1">
+          {article.title}
+        </h3>
+        <p className="text-[10px] text-gray-400">{formatDate(article.publishedAt)}</p>
       </div>
     </Link>
   );

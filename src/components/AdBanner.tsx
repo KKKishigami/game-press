@@ -1,8 +1,6 @@
-// AdSense広告プレースホルダー
-// 実運用時はGoogle AdSenseのスクリプトタグに置き換えてください
-export default function AdBanner({ label = '広告' }: { label?: string }) {
+export default function AdBanner({ label = '広告', height = 'h-20' }: { label?: string; height?: string }) {
   return (
-    <div className="w-full bg-gray-900 border border-dashed border-gray-700 rounded-lg flex items-center justify-center py-6 text-gray-600 text-xs">
+    <div className={`w-full bg-gray-100 border border-dashed border-gray-300 flex items-center justify-center ${height} text-gray-400 text-xs`}>
       {label} (Google AdSense)
     </div>
   );

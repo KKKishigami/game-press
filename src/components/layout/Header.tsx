@@ -2,131 +2,135 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Menu, X, Gamepad2, Search } from 'lucide-react';
+import { Search, Menu, X, Gamepad2 } from 'lucide-react';
 
-const navItems = [
-  { label: 'コンシューマ', href: '/category/console' },
-  { label: 'アプリ', href: '/category/mobile' },
-  { label: '🎮 タイプ診断', href: '/diagnosis' },
-  {
-    label: '機種別',
-    href: '#',
-    children: [
-      { label: 'PS5', href: '/platform/PS5' },
-      { label: 'PS4', href: '/platform/PS4' },
-      { label: 'Switch', href: '/platform/Switch' },
-      { label: 'Xbox', href: '/platform/Xbox' },
-      { label: 'PC', href: '/platform/PC' },
-      { label: 'iOS', href: '/platform/iOS' },
-      { label: 'Android', href: '/platform/Android' },
-    ],
-  },
-  {
-    label: '年代別',
-    href: '#',
-    children: [
-      { label: '2020年代', href: '/era/2020s' },
-      { label: '2010年代', href: '/era/2010s' },
-      { label: '2000年代', href: '/era/2000s' },
-      { label: '1990年代', href: '/era/1990s' },
-      { label: '1980年代', href: '/era/1980s' },
-    ],
-  },
+const platforms = [
+  { label: 'PC', href: '/platform/PC' },
+  { label: 'PS5/PS4', href: '/platform/PS5' },
+  { label: 'Switch', href: '/platform/Switch' },
+  { label: 'Xbox', href: '/platform/Xbox' },
+  { label: 'スマートフォン', href: '/category/mobile' },
+];
+
+const subNav = [
+  { label: 'ニュース', href: '/' },
+  { label: 'レビュー', href: '/type/review' },
+  { label: 'インタビュー', href: '/type/interview_summary' },
+  { label: 'リリース情報', href: '/type/release' },
+  { label: '年代別', href: '/era/2020s' },
 ];
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [search, setSearch] = useState('');
 
   return (
-    <header className="bg-gray-950 border-b border-gray-800 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="bg-gradient-to-r from-purple-500 to-cyan-500 p-1.5 rounded-lg">
-              <Gamepad2 className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-white font-black text-xl tracking-tight">
-              GAME<span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">PULSE</span>
-            </span>
-          </Link>
+    <header className="bg-white border-b border-gray-300 sticky top-0 z-50 shadow-sm">
+      {/* Top bar */}
+      <div className="bg-[#cc0000]">
+        <div className="max-w-[1200px] mx-auto px-3 py-1 flex items-center justify-between">
+          <p className="text-white text-xs">ゲームの総合情報サイト</p>
+          <div className="flex items-center gap-3 text-xs text-white/80">
+            <Link href="/privacy-policy" className="hover:text-white">プライバシー</Link>
+            <Link href="/contact" className="hover:text-white">お問い合わせ</Link>
+          </div>
+        </div>
+      </div>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
-              <div
-                key={item.label}
-                className="relative"
-                onMouseEnter={() => item.children && setOpenDropdown(item.label)}
-                onMouseLeave={() => setOpenDropdown(null)}
-              >
-                <Link
-                  href={item.href}
-                  className="px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-md transition-colors text-sm font-medium flex items-center gap-1"
-                >
-                  {item.label}
-                  {item.children && <span className="text-xs">▾</span>}
-                </Link>
-                {item.children && openDropdown === item.label && (
-                  <div className="absolute top-full left-0 bg-gray-900 border border-gray-700 rounded-lg shadow-xl min-w-36 py-1">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.label}
-                        href={child.href}
-                        className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
+      {/* Logo + Search */}
+      <div className="max-w-[1200px] mx-auto px-3 py-2 flex items-center justify-between gap-4">
+        <Link href="/" className="flex items-center gap-2 flex-shrink-0">
+          <div className="bg-[#cc0000] p-1.5 rounded">
+            <Gamepad2 className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <span className="text-[#cc0000] font-black text-2xl tracking-tight leading-none">GAME</span>
+            <span className="text-gray-900 font-black text-2xl tracking-tight leading-none">PULSE</span>
+            <p className="text-gray-400 text-[10px] leading-none mt-0.5">ゲームの総合情報サイト</p>
+          </div>
+        </Link>
 
-          {/* Search + Mobile toggle */}
-          <div className="flex items-center gap-2">
-            <button className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-md transition-colors">
-              <Search className="w-5 h-5" />
-            </button>
-            <button
-              className="md:hidden p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-md transition-colors"
-              onClick={() => setMobileOpen(!mobileOpen)}
-            >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        <div className="flex-1 max-w-md hidden sm:block">
+          <div className="flex border border-gray-300 rounded overflow-hidden">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="ゲームタイトル・キーワードで検索"
+              className="flex-1 px-3 py-1.5 text-sm text-gray-700 outline-none bg-white"
+            />
+            <button className="bg-[#cc0000] px-3 text-white hover:bg-[#aa0000] transition-colors">
+              <Search className="w-4 h-4" />
             </button>
           </div>
+        </div>
+
+        <button
+          className="sm:hidden p-2 text-gray-600"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+      </div>
+
+      {/* Platform nav */}
+      <div className="bg-[#cc0000]">
+        <div className="max-w-[1200px] mx-auto px-3 flex items-center overflow-x-auto">
+          {platforms.map((p) => (
+            <Link
+              key={p.label}
+              href={p.href}
+              className="text-white text-sm font-bold px-4 py-2 hover:bg-[#aa0000] transition-colors whitespace-nowrap border-r border-[#aa0000] first:border-l"
+            >
+              {p.label}
+            </Link>
+          ))}
+          <Link
+            href="/era/1990s"
+            className="text-white/70 text-sm px-4 py-2 hover:bg-[#aa0000] transition-colors whitespace-nowrap ml-auto"
+          >
+            レトロゲーム
+          </Link>
+        </div>
+      </div>
+
+      {/* Sub nav */}
+      <div className="bg-gray-100 border-b border-gray-300">
+        <div className="max-w-[1200px] mx-auto px-3 flex items-center gap-1 overflow-x-auto">
+          {subNav.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="text-gray-600 text-xs px-3 py-1.5 hover:text-[#cc0000] hover:bg-white transition-colors whitespace-nowrap"
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
       </div>
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-gray-900 border-t border-gray-800 px-4 py-3 space-y-1">
-          {navItems.map((item) => (
-            <div key={item.label}>
-              <Link
-                href={item.href}
-                className="block px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-md text-sm font-medium"
-                onClick={() => setMobileOpen(false)}
-              >
-                {item.label}
-              </Link>
-              {item.children && (
-                <div className="ml-4 space-y-1">
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.label}
-                      href={child.href}
-                      className="block px-3 py-1.5 text-gray-400 hover:text-white text-sm"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+        <div className="sm:hidden bg-white border-t border-gray-200 px-4 py-3 space-y-2">
+          <div className="flex border border-gray-300 rounded overflow-hidden mb-3">
+            <input
+              type="text"
+              placeholder="キーワード検索"
+              className="flex-1 px-3 py-2 text-sm outline-none"
+            />
+            <button className="bg-[#cc0000] px-3 text-white">
+              <Search className="w-4 h-4" />
+            </button>
+          </div>
+          {[...platforms, ...subNav].map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="block py-1.5 text-sm text-gray-700 border-b border-gray-100"
+              onClick={() => setMobileOpen(false)}
+            >
+              {item.label}
+            </Link>
           ))}
         </div>
       )}
