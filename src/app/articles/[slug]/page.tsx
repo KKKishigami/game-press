@@ -1,5 +1,3 @@
-export const runtime = 'edge';
-
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,6 +6,12 @@ import { categoryLabel, articleTypeLabel, articleTypeBadgeColor, formatDate } fr
 import ArticleCard from '@/components/ArticleCard';
 import AdBanner from '@/components/AdBanner';
 import { ExternalLink, Tag } from 'lucide-react';
+
+import { articles } from '@/lib/mock-data';
+
+export function generateStaticParams() {
+  return articles.map((a) => ({ slug: a.slug }));
+}
 
 interface Props {
   params: Promise<{ slug: string }>;

@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+
 export const metadata = { title: '利用規約' };
 
 export default function TermsPage() {

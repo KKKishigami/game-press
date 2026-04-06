@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+
 export const metadata = { title: '広告・PR開示ポリシー' };
 
 export default function DisclosurePage() {

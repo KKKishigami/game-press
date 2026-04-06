@@ -1,9 +1,11 @@
-export const runtime = 'edge';
-
 import { notFound } from 'next/navigation';
 import { getArticlesByPlatform, platforms } from '@/lib/mock-data';
 import ArticleCard from '@/components/ArticleCard';
 import AdBanner from '@/components/AdBanner';
+
+export function generateStaticParams() {
+  return platforms.map((p) => ({ platform: p.id }));
+}
 
 interface Props {
   params: Promise<{ platform: string }>;

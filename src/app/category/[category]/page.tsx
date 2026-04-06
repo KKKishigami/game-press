@@ -1,10 +1,12 @@
-export const runtime = 'edge';
-
 import { notFound } from 'next/navigation';
 import { getConsoleArticles, getMobileArticles } from '@/lib/mock-data';
 import ArticleCard from '@/components/ArticleCard';
 import AdBanner from '@/components/AdBanner';
 import { Category } from '@/types';
+
+export function generateStaticParams() {
+  return [{ category: 'console' }, { category: 'mobile' }];
+}
 
 interface Props {
   params: Promise<{ category: string }>;

@@ -1,9 +1,11 @@
-export const runtime = 'edge';
-
 import { notFound } from 'next/navigation';
 import { getArticlesByEra, eras } from '@/lib/mock-data';
 import ArticleCard from '@/components/ArticleCard';
 import AdBanner from '@/components/AdBanner';
+
+export function generateStaticParams() {
+  return eras.map((e) => ({ era: e.id }));
+}
 
 interface Props {
   params: Promise<{ era: string }>;
