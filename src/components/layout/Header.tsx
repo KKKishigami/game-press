@@ -18,6 +18,7 @@ const subNav = [
   { label: 'インタビュー', href: '/type/interview_summary' },
   { label: 'リリース情報', href: '/type/release' },
   { label: '年代別', href: '/era/2020s' },
+  { label: '🎮 タイプ診断', href: '/diagnosis' },
 ];
 
 export default function Header() {
