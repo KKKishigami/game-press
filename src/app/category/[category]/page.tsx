@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { notFound } from 'next/navigation';
 import { getConsoleArticles, getMobileArticles } from '@/lib/mock-data';
 import ArticleCard from '@/components/ArticleCard';

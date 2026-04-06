@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 export const metadata = { title: 'プライバシーポリシー' };
 
 export default function PrivacyPolicyPage() {
