@@ -11,21 +11,15 @@ import {
   platforms,
   eras,
 } from '@/lib/mock-data';
-import { categoryLabel, formatDate } from '@/lib/utils';
-import { ChevronRight, TrendingUp } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
-function SectionHeader({ title, href }: { title: string; href?: string }) {
+function SectionLabel({ number, title }: { number: string; title: string }) {
   return (
-    <div className="flex items-center justify-between mb-2 border-b-2 border-[#cc0000] pb-1">
-      <h2 className="text-sm font-black text-gray-800 flex items-center gap-1">
-        <span className="w-1 h-4 bg-[#cc0000] inline-block" />
-        {title}
-      </h2>
-      {href && (
-        <Link href={href} className="text-[#cc0000] text-xs flex items-center hover:underline">
-          もっと見る <ChevronRight className="w-3 h-3" />
-        </Link>
-      )}
+    <div className="flex items-center gap-4 mb-8">
+      <span className="font-bebas text-[#e8000d] text-xs tracking-[0.3em]">{number}</span>
+      <div className="flex-1 h-px bg-[#1a1a1a]" />
+      <span className="font-bebas text-white text-xl tracking-widest">{title}</span>
+      <div className="w-8 h-px bg-[#e8000d]" />
     </div>
   );
 }
@@ -35,190 +29,157 @@ export default function HomePage() {
   const featured = getFeaturedArticles();
   const consoleArticles = getConsoleArticles();
   const mobileArticles = getMobileArticles();
-  const [mainFeatured, ...subFeatured] = featured;
+  const [hero, ...rest] = featured;
 
   return (
-    <div className="bg-[#f0f0f0]">
-      {/* Breaking news ticker */}
+    <div className="bg-black pt-14">
+      {/* Ticker */}
       <HeroSlider articles={latest} />
 
-      <div className="max-w-[1200px] mx-auto px-3 py-3">
-        {/* Ad banner top */}
-        <div className="mb-3">
-          <AdBanner label="広告 (728×90)" height="h-16" />
+      {/* ===== HERO ===== */}
+      {hero && (
+        <section className="relative">
+          <ArticleCard article={hero} size="hero" />
+          {/* Scroll indicator */}
+          <div className="absolute bottom-4 right-6 flex flex-col items-center gap-1 opacity-40">
+            <span className="font-bebas text-[10px] tracking-[0.3em] text-white rotate-90 origin-center translate-x-3">SCROLL</span>
+            <div className="w-px h-8 bg-white" />
+          </div>
+        </section>
+      )}
+
+      <div className="max-w-[1400px] mx-auto px-6">
+
+        {/* Ad */}
+        <div className="py-6">
+          <AdBanner height="h-16" />
         </div>
 
-        {/* ===== 3カラムレイアウト ===== */}
-        <div className="flex gap-3">
+        {/* ===== 01 FEATURED ===== */}
+        <section className="py-12 border-t border-[#1a1a1a]">
+          <SectionLabel number="01" title="FEATURED" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {rest.slice(0, 3).map((a) => (
+              <ArticleCard key={a.id} article={a} size="large" />
+            ))}
+          </div>
+        </section>
 
-          {/* ===== 左サイドバー ===== */}
-          <aside className="hidden lg:block w-44 flex-shrink-0 space-y-3">
-            {/* 機種別メニュー */}
-            <div className="bg-white border border-gray-200">
-              <div className="bg-[#cc0000] px-2 py-1">
-                <p className="text-white text-xs font-bold">機種別</p>
-              </div>
-              <div className="p-1">
-                {platforms.map((p) => (
-                  <Link
-                    key={p.id}
-                    href={`/platform/${p.id}`}
-                    className="flex items-center gap-1.5 px-2 py-1.5 text-xs text-gray-700 hover:bg-gray-50 hover:text-[#cc0000] border-b border-gray-100 last:border-0 transition-colors"
-                  >
-                    <span>{p.icon}</span>
-                    {p.label}
-                  </Link>
-                ))}
-              </div>
+        {/* ===== 02 LATEST NEWS ===== */}
+        <section className="py-12 border-t border-[#1a1a1a]">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-4">
+              <span className="font-bebas text-[#e8000d] text-xs tracking-[0.3em]">02</span>
+              <div className="w-8 h-px bg-[#1a1a1a]" />
+              <span className="font-bebas text-white text-xl tracking-widest">LATEST NEWS</span>
+            </div>
+            <Link href="/category/console" className="font-bebas text-xs tracking-widest text-[#888] hover:text-white flex items-center gap-1 transition-colors border border-[#333] hover:border-white px-3 py-1">
+              ALL NEWS <ChevronRight className="w-3 h-3" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* メイン記事リスト */}
+            <div className="lg:col-span-2 space-y-0 divide-y divide-[#1a1a1a]">
+              {latest.slice(0, 6).map((a) => (
+                <ArticleCard key={a.id} article={a} size="small" />
+              ))}
             </div>
 
-            {/* 年代別メニュー */}
-            <div className="bg-white border border-gray-200">
-              <div className="bg-gray-700 px-2 py-1">
-                <p className="text-white text-xs font-bold">年代別</p>
-              </div>
-              <div className="p-1">
-                {eras.map((e) => (
-                  <Link
-                    key={e.id}
-                    href={`/era/${e.id}`}
-                    className="block px-2 py-1.5 text-xs text-gray-700 hover:bg-gray-50 hover:text-[#cc0000] border-b border-gray-100 last:border-0 transition-colors"
-                  >
-                    {e.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* 広告 */}
-            <AdBanner label="広告" height="h-48" />
-          </aside>
-
-          {/* ===== メインコンテンツ ===== */}
-          <main className="flex-1 min-w-0 space-y-4">
-
-            {/* 目玉記事 */}
-            {mainFeatured && (
-              <section>
-                <SectionHeader title="注目記事" />
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <ArticleCard article={mainFeatured} size="large" />
-                  <div className="grid grid-cols-2 gap-2">
-                    {subFeatured.slice(0, 4).map((a) => (
-                      <ArticleCard key={a.id} article={a} size="medium" />
-                    ))}
-                  </div>
-                </div>
-              </section>
-            )}
-
-            {/* コンシューマ最新 */}
-            <section>
-              <SectionHeader title="コンシューマゲーム" href="/category/console" />
-              <div className="bg-white border border-gray-200 p-3">
-                <div className="divide-y divide-gray-100">
-                  {consoleArticles.map((a) => (
-                    <ArticleCard key={a.id} article={a} size="small" />
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* 広告 */}
-            <AdBanner label="広告 (記事間)" height="h-16" />
-
-            {/* スマホゲーム最新 */}
-            <section>
-              <SectionHeader title="スマートフォンゲーム" href="/category/mobile" />
-              <div className="bg-white border border-gray-200 p-3">
-                <div className="divide-y divide-gray-100">
-                  {mobileArticles.map((a) => (
-                    <ArticleCard key={a.id} article={a} size="small" />
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* 機種別ショートカット */}
-            <section>
-              <SectionHeader title="機種別で探す" />
-              <div className="grid grid-cols-4 sm:grid-cols-7 gap-1.5">
-                {platforms.map((p) => (
-                  <Link
-                    key={p.id}
-                    href={`/platform/${p.id}`}
-                    className="bg-white border border-gray-200 hover:border-[#cc0000] hover:bg-red-50 transition-colors text-center py-2 px-1 group"
-                  >
-                    <div className="text-xl mb-0.5">{p.icon}</div>
-                    <p className="text-[10px] font-bold text-gray-700 group-hover:text-[#cc0000]">{p.label}</p>
-                  </Link>
-                ))}
-              </div>
-            </section>
-
-            {/* 年代別 */}
-            <section>
-              <SectionHeader title="年代別で探す" />
-              <div className="grid grid-cols-5 gap-1.5">
-                {eras.map((e) => (
-                  <Link
-                    key={e.id}
-                    href={`/era/${e.id}`}
-                    className="bg-gray-700 hover:bg-[#cc0000] transition-colors text-center py-3 group"
-                  >
-                    <p className="text-xs font-bold text-white">{e.label}</p>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          </main>
-
-          {/* ===== 右サイドバー ===== */}
-          <aside className="hidden md:block w-52 flex-shrink-0 space-y-3">
-            {/* 広告 */}
-            <AdBanner label="広告 (300×250)" height="h-60" />
-
-            {/* ランキング */}
-            <div className="bg-white border border-gray-200">
-              <div className="bg-gray-800 px-2 py-1 flex items-center gap-1">
-                <TrendingUp className="w-3 h-3 text-[#cc0000]" />
-                <p className="text-white text-xs font-bold">アクセスランキング</p>
-              </div>
-              <div className="p-2">
-                <div className="flex border-b border-gray-200 mb-2">
-                  <button className="flex-1 text-[10px] font-bold text-[#cc0000] border-b-2 border-[#cc0000] py-1">日間</button>
-                  <button className="flex-1 text-[10px] text-gray-400 py-1">週間</button>
-                </div>
-                <div className="space-y-2">
+            {/* サイドランキング */}
+            <div className="space-y-6">
+              <div>
+                <p className="font-bebas text-xs tracking-[0.3em] text-[#e8000d] mb-4 border-b border-[#1a1a1a] pb-2">RANKING</p>
+                <div className="space-y-4">
                   {latest.slice(0, 5).map((a, i) => (
-                    <Link key={a.id} href={`/articles/${a.slug}`} className="group flex gap-2 items-start">
-                      <span className={`text-sm font-black flex-shrink-0 w-5 text-center ${i === 0 ? 'text-[#cc0000]' : i === 1 ? 'text-gray-600' : i === 2 ? 'text-amber-600' : 'text-gray-400'}`}>
-                        {i + 1}
+                    <Link key={a.id} href={`/articles/${a.slug}`} className="group flex gap-4 items-start">
+                      <span className="font-bebas text-3xl leading-none text-[#1a1a1a] group-hover:text-[#e8000d] transition-colors flex-shrink-0 w-8">
+                        {String(i + 1).padStart(2, '0')}
                       </span>
-                      <p className="text-[11px] text-gray-700 line-clamp-2 leading-snug group-hover:text-[#cc0000] transition-colors">
+                      <p className="text-[#888] text-xs leading-snug group-hover:text-white transition-colors line-clamp-2">
                         {a.title}
                       </p>
                     </Link>
                   ))}
                 </div>
               </div>
+              <AdBanner label="広告" height="h-48" />
             </div>
+          </div>
+        </section>
 
-            {/* 最新記事 */}
-            <div className="bg-white border border-gray-200">
-              <div className="bg-gray-800 px-2 py-1">
-                <p className="text-white text-xs font-bold">最新記事</p>
-              </div>
-              <div className="p-2 divide-y divide-gray-100">
-                {latest.slice(0, 6).map((a) => (
-                  <ArticleCard key={a.id} article={a} size="list" />
-                ))}
-              </div>
-            </div>
+        {/* ===== 03 CONSOLE ===== */}
+        <section className="py-12 border-t border-[#1a1a1a]">
+          <SectionLabel number="03" title="CONSOLE" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {consoleArticles.slice(0, 4).map((a) => (
+              <ArticleCard key={a.id} article={a} size="medium" />
+            ))}
+          </div>
+          <div className="mt-4 text-center">
+            <Link href="/category/console" className="inline-block font-bebas tracking-widest text-sm border border-[#333] hover:border-[#e8000d] text-[#888] hover:text-[#e8000d] px-8 py-2 transition-colors">
+              VIEW ALL CONSOLE →
+            </Link>
+          </div>
+        </section>
 
-            {/* 広告 */}
-            <AdBanner label="広告 (300×600)" height="h-72" />
-          </aside>
+        {/* Ad */}
+        <AdBanner height="h-16" />
+
+        {/* ===== 04 MOBILE ===== */}
+        <section className="py-12 border-t border-[#1a1a1a]">
+          <SectionLabel number="04" title="MOBILE" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {mobileArticles.slice(0, 4).map((a) => (
+              <ArticleCard key={a.id} article={a} size="medium" />
+            ))}
+          </div>
+          <div className="mt-4 text-center">
+            <Link href="/category/mobile" className="inline-block font-bebas tracking-widest text-sm border border-[#333] hover:border-[#e8000d] text-[#888] hover:text-[#e8000d] px-8 py-2 transition-colors">
+              VIEW ALL MOBILE →
+            </Link>
+          </div>
+        </section>
+
+        {/* ===== 05 PLATFORM ===== */}
+        <section className="py-12 border-t border-[#1a1a1a]">
+          <SectionLabel number="05" title="PLATFORM" />
+          <div className="grid grid-cols-3 md:grid-cols-7 gap-2">
+            {platforms.map((p) => (
+              <Link
+                key={p.id}
+                href={`/platform/${p.id}`}
+                className="group border border-[#1a1a1a] hover:border-[#e8000d] transition-colors p-4 text-center"
+              >
+                <div className="text-2xl mb-2">{p.icon}</div>
+                <p className="font-bebas text-xs tracking-widest text-[#666] group-hover:text-white transition-colors">{p.label}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* ===== 06 ERA ===== */}
+        <section className="py-12 border-t border-[#1a1a1a]">
+          <SectionLabel number="06" title="ERA" />
+          <div className="grid grid-cols-5 gap-2">
+            {eras.map((e, i) => (
+              <Link
+                key={e.id}
+                href={`/era/${e.id}`}
+                className="group relative border border-[#1a1a1a] hover:border-[#e8000d] transition-colors p-6 text-center overflow-hidden"
+              >
+                <span className="absolute top-2 right-2 font-bebas text-[40px] leading-none text-[#0a0a0a] group-hover:text-[#150000] transition-colors select-none">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="font-bebas text-sm tracking-widest text-[#888] group-hover:text-white transition-colors relative z-10">{e.label}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Ad bottom */}
+        <div className="py-6 border-t border-[#1a1a1a]">
+          <AdBanner height="h-16" />
         </div>
       </div>
     </div>

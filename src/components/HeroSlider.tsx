@@ -1,10 +1,8 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Article } from '@/types';
-import { formatDate } from '@/lib/utils';
 
 interface Props {
   articles: Article[];
@@ -19,7 +17,7 @@ export default function HeroSlider({ articles }: Props) {
     if (!track) return;
     let animFrame: number;
     let pos = 0;
-    const speed = 0.5;
+    const speed = 0.4;
     const singleWidth = track.scrollWidth / 2;
 
     const animate = () => {
@@ -34,7 +32,6 @@ export default function HeroSlider({ articles }: Props) {
     const resume = () => { animFrame = requestAnimationFrame(animate); };
     track.addEventListener('mouseenter', pause);
     track.addEventListener('mouseleave', resume);
-
     return () => {
       cancelAnimationFrame(animFrame);
       track.removeEventListener('mouseenter', pause);
@@ -43,33 +40,20 @@ export default function HeroSlider({ articles }: Props) {
   }, []);
 
   return (
-    <div className="relative bg-[#222] overflow-hidden py-2 border-b-2 border-[#cc0000]">
-      <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#222] to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#222] to-transparent z-10 pointer-events-none" />
-      <div ref={trackRef} className="flex gap-3 will-change-transform" style={{ width: 'max-content' }}>
+    <div className="relative border-b border-[#1a1a1a] overflow-hidden py-2 bg-[#050505]">
+      <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
+      <div ref={trackRef} className="flex items-center gap-8 will-change-transform" style={{ width: 'max-content' }}>
         {items.map((article, i) => (
           <Link
             key={`${article.id}-${i}`}
             href={`/articles/${article.slug}`}
-            className="flex-shrink-0 w-56 group"
+            className="flex-shrink-0 flex items-center gap-2 group"
           >
-            <div className="flex gap-2 items-center">
-              <div className="relative w-20 h-12 flex-shrink-0 overflow-hidden bg-gray-700">
-                <Image
-                  src={article.thumbnail}
-                  alt={article.title}
-                  fill
-                  className="object-cover group-hover:opacity-80 transition-opacity"
-                  sizes="80px"
-                />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-white text-[11px] font-medium line-clamp-2 leading-snug group-hover:text-[#ff6666] transition-colors">
-                  {article.title}
-                </p>
-                <p className="text-gray-400 text-[10px] mt-0.5">{formatDate(article.publishedAt)}</p>
-              </div>
-            </div>
+            <span className="w-1 h-1 bg-[#e8000d] rounded-full flex-shrink-0" />
+            <span className="font-bebas text-xs tracking-widest text-[#666] group-hover:text-white transition-colors whitespace-nowrap">
+              {article.title}
+            </span>
           </Link>
         ))}
       </div>
