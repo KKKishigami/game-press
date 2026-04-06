@@ -10,6 +10,7 @@ const navItems = [
   { label: 'MOBILE', href: '/category/mobile' },
   { label: 'PLATFORM', href: '/platform/PS5' },
   { label: 'ERA', href: '/era/2020s' },
+  { label: '診断', href: '/diagnosis' },
 ];
 
 export default function Header() {
