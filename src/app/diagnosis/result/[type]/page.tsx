@@ -1,10 +1,12 @@
-export const runtime = 'edge';
-
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTypeByCode, gameTypes, GameType } from '@/lib/diagnosis-data';
 import TypeImage from '@/components/diagnosis/TypeImage';
+
+export function generateStaticParams() {
+  return gameTypes.map((t) => ({ type: t.code }));
+}
 
 interface Props {
   params: Promise<{ type: string }>;
