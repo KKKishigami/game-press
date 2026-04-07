@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = getTypeByCode(type);
   if (!t) return { title: 'タイプ不明' };
   return {
-    title: `${t.code} ${t.name} — ゲームタイプ診断`,
+    title: `${t.code} ${t.characterName} — ゲームタイプ診断`,
     description: t.catchphrase,
   };
 }
@@ -32,10 +32,9 @@ export default async function ResultPage({ params }: Props) {
   const rival   = getTypeByCode(gt.rivalMatch)!;
 
   const axes = [
-    { label: 'プレイスタイル', a: 'ソロ',      b: 'パーティ',  v: gt.code[0] === 'P' ? 1 : 0 },
-    { label: '戦闘スタイル',   a: '攻撃',      b: '防衛',      v: gt.code[1] === 'D' ? 1 : 0 },
-    { label: '楽しみ方',       a: 'ストーリー', b: '効率',      v: gt.code[2] === 'E' ? 1 : 0 },
-    { label: '熱量',           a: 'カジュアル', b: 'ガチ',      v: gt.code[3] === 'G' ? 1 : 0 },
+    { label: 'プレイスタイル', a: 'ソロ',       b: 'パーティ', v: gt.code[0] === 'P' ? 1 : 0 },
+    { label: '戦闘スタイル',   a: '攻撃',       b: '防衛',     v: gt.code[1] === 'D' ? 1 : 0 },
+    { label: '熱量',           a: 'カジュアル', b: 'ガチ',     v: gt.code[2] === 'H' ? 1 : 0 },
   ];
 
   return (
@@ -78,7 +77,7 @@ export default async function ResultPage({ params }: Props) {
             className="text-4xl md:text-5xl font-black mb-4 text-white"
             style={{ textShadow: `0 0 40px ${gt.accentColor}60` }}
           >
-            {gt.name}
+            {gt.characterName}
           </h1>
 
           {/* Catchphrase */}
@@ -120,7 +119,7 @@ export default async function ResultPage({ params }: Props) {
           </div>
 
           {/* Axis bars */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full max-w-2xl">
+          <div className="grid grid-cols-3 gap-3 w-full max-w-lg mx-auto">
             {axes.map((ax) => (
               <div
                 key={ax.label}
@@ -206,8 +205,8 @@ export default async function ResultPage({ params }: Props) {
 
         {/* ── All 16 types ──────────────────────────────────────────────── */}
         <section className="mb-14">
-          <h2 className="text-white font-black text-xl mb-5 text-center">全 16 タイプ</h2>
-          <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
+          <h2 className="text-white font-black text-xl mb-5 text-center">全 8 タイプ</h2>
+          <div className="grid grid-cols-4 gap-3">
             {gameTypes.map((t) => (
               <Link
                 key={t.code}
@@ -217,7 +216,7 @@ export default async function ResultPage({ params }: Props) {
                     ? 'scale-110 border-white/30 bg-white/10'
                     : 'border-gray-800 bg-gray-900/40 hover:border-gray-600 hover:scale-105 hover:bg-gray-800/50'
                   }`}
-                title={t.name}
+                title={t.characterName}
               >
                 <span className="text-2xl leading-none">{t.emoji}</span>
                 <span className="text-gray-500 text-xs font-mono leading-none">{t.code}</span>
@@ -290,7 +289,7 @@ function CompatCard({ type, comment, borderColor, fromColor, compact = false }: 
         >
           ◆ {type.code}
         </div>
-        <div className="text-white font-black text-base mb-1">{type.name}</div>
+        <div className="text-white font-black text-base mb-1">{type.characterName}</div>
         <p className="text-gray-400 text-sm leading-relaxed">{comment}</p>
       </div>
     </div>

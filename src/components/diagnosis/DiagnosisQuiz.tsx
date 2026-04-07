@@ -6,20 +6,19 @@ import { questions, calculateTypeCode } from '@/lib/diagnosis-data';
 
 type Phase = 'intro' | 'quiz' | 'revealing';
 
-const AXIS_LABELS = ['プレイスタイル', '戦闘スタイル', '楽しみ方', '熱量'];
+const AXIS_LABELS = ['プレイスタイル', '戦闘スタイル', '熱量'];
 const AXIS_GRADIENTS = [
   'from-purple-600 to-cyan-600',
   'from-red-600 to-orange-500',
-  'from-blue-600 to-teal-500',
   'from-yellow-500 to-pink-600',
 ];
-const ALL_EMOJIS = ['🐺','⚔️','💥','💀','🔮','🦅','🏰','⚙️','🌟','👑','🎆','⚡','💚','🐉','🔧','✨'];
+const ALL_EMOJIS = ['🗡️','🪓','🐺','🚀','🍄','⚡','👻','🥊'];
 
 export default function DiagnosisQuiz() {
   const router = useRouter();
   const [phase, setPhase] = useState<Phase>('intro');
   const [currentQ, setCurrentQ] = useState(0);
-  const [scores, setScores] = useState([0, 0, 0, 0]);
+  const [scores, setScores] = useState([0, 0, 0]);
   const [selected, setSelected] = useState<'A' | 'B' | null>(null);
   const [resultCode, setResultCode] = useState('');
   const [revealStep, setRevealStep] = useState(0);
@@ -239,15 +238,15 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
           <p className="text-gray-300 text-lg font-semibold">
             あなたのゲームスタイルは{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 font-black">
-              16タイプ
+              8タイプ
             </span>
             {' '}のどれ？
           </p>
-          <p className="text-gray-500 text-sm">20の質問に答えて、タイプ・相性を一発診断！</p>
+          <p className="text-gray-500 text-sm">15の質問に答えて、あなたのゲームキャラを診断！</p>
         </div>
 
         {/* Type grid preview */}
-        <div className="grid grid-cols-8 gap-1.5 mb-10 max-w-xs mx-auto">
+        <div className="grid grid-cols-4 gap-1.5 mb-10 max-w-xs mx-auto">
           {ALL_EMOJIS.map((emoji, i) => (
             <div
               key={i}
