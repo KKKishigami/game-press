@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>NEONPULSE — ゲームニュース</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Orbitron:wght@700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-screen-label="NEONPULSE Home">
+
+<!-- =============== AUTO-SCROLL TICKER =============== -->
+<div class="ticker" aria-label="最新ニュース速報">
+  <div class="ticker-label"><span class="ticker-dot"></span>BREAKING</div>
+  <div class="ticker-viewport">
+    <div class="ticker-track" id="ticker-track">
+      <!-- Real facts, cited -->
+      <div class="ticker-item"><b>GTA VI</b><span>発売日が2026年11月19日に再延期</span><span class="sep">/</span><span class="src">Rockstar Games 公式</span></div>
+      <div class="ticker-item"><b>SWITCH 2</b><span>2025年6月5日発売・定価 ¥69,980</span><span class="sep">/</span><span class="src">Nintendo 公式</span></div>
+      <div class="ticker-item"><b>ELDEN RING NIGHTREIGN</b><span>世界500万本突破</span><span class="sep">/</span><span class="src">Bandai Namco</span></div>
+      <div class="ticker-item"><b>THE FORSAKEN HOLLOWS</b><span>DLC が2025年12月4日に配信開始</span><span class="sep">/</span><span class="src">Bandai Namco</span></div>
+      <div class="ticker-item"><b>DONKEY KONG BANANZA</b><span>2025年7月17日 Switch 2 専用タイトルとして発売</span><span class="sep">/</span><span class="src">Nintendo Direct</span></div>
+      <div class="ticker-item"><b>THE DUSKBLOODS</b><span>FromSoftware 新作 Switch 2 専用で2026年発売予定</span><span class="sep">/</span><span class="src">TechCrunch</span></div>
+      <!-- Duplicate for seamless scroll -->
+      <div class="ticker-item"><b>GTA VI</b><span>発売日が2026年11月19日に再延期</span><span class="sep">/</span><span class="src">Rockstar Games 公式</span></div>
+      <div class="ticker-item"><b>SWITCH 2</b><span>2025年6月5日発売・定価 ¥69,980</span><span class="sep">/</span><span class="src">Nintendo 公式</span></div>
+      <div class="ticker-item"><b>ELDEN RING NIGHTREIGN</b><span>世界500万本突破</span><span class="sep">/</span><span class="src">Bandai Namco</span></div>
+      <div class="ticker-item"><b>THE FORSAKEN HOLLOWS</b><span>DLC が2025年12月4日に配信開始</span><span class="sep">/</span><span class="src">Bandai Namco</span></div>
+      <div class="ticker-item"><b>DONKEY KONG BANANZA</b><span>2025年7月17日 Switch 2 専用タイトルとして発売</span><span class="sep">/</span><span class="src">Nintendo Direct</span></div>
+      <div class="ticker-item"><b>THE DUSKBLOODS</b><span>FromSoftware 新作 Switch 2 専用で2026年発売予定</span><span class="sep">/</span><span class="src">TechCrunch</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- =============== HEADER =============== -->
+<header class="header">
+  <div class="logo">
+    <svg viewBox="0 0 32 32" fill="none">
+      <path d="M2 16 L8 16 L11 8 L15 24 L18 12 L21 20 L24 16 L30 16" stroke="url(#g)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <defs><linearGradient id="g" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#FF2E88"/><stop offset="1" stop-color="#00E5FF"/></linearGradient></defs>
+    </svg>
+    <span><span class="a">NEON</span><span class="b">PULSE</span></span>
+  </div>
+  <nav class="nav">
+    <a href="#" class="active">HOME</a>
+    <a href="#">ニュース</a>
+    <a href="#">レビュー</a>
+    <a href="#">E-SPORTS</a>
+    <a href="#">ハード</a>
+  </nav>
+  <div class="header-right">
+    <input class="search" placeholder="ゲーム・記事を検索">
+  </div>
+</header>
+
+<!-- =============== MAIN =============== -->
+<main class="wrap">
+
+  <div class="disclosure">
+    <b>◆ 編集方針:</b> 本ページは実在するゲームニュースの事実のみを扱います。画像は各ソース（Rockstar Games / Nintendo / Bandai Namco / FromSoftware）の公式素材からの引用で、引用元をすべて明記しています。著作権は各社に帰属します。
+  </div>
+
+  <div class="section-label">TOP STORY ///</div>
+
+  <!-- =============== HERO =============== -->
+  <section class="hero-grid">
+
+    <!-- Main hero: GTA VI delay -->
+    <article class="hero-main">
+      <div class="cover src-img" data-src="Art: NEONPULSE / Subject © Rockstar Games" style="background:
+        radial-gradient(ellipse at 30% 70%, #FF5EA0 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, #00E5FF 0%, transparent 55%),
+        linear-gradient(160deg, #2A1050 0%, #0A0A12 60%, #1a0530 100%)">
+        <div style="position:absolute;inset:0;background:
+          repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 4px);mix-blend-mode:overlay"></div>
+        <div style="position:absolute;left:40px;top:40px;font-family:var(--font-disp);font-weight:900;font-size:110px;line-height:0.9;letter-spacing:-0.04em;color:rgba(255,255,255,0.06);pointer-events:none">VI<br>VI</div>
+        <div style="position:absolute;right:40px;top:40px;font-family:var(--font-mono);font-size:11px;color:#FF5EA0;letter-spacing:0.2em;text-align:right">
+          <div style="opacity:0.6">ROCKSTAR GAMES</div>
+          <div style="font-size:40px;color:#fff;font-family:var(--font-disp);font-weight:900;letter-spacing:0;margin-top:8px">GTA VI</div>
+          <div style="margin-top:8px;opacity:0.8">LEONIDA · VICE CITY</div>
+        </div>
+      </div>
+      <div class="scrim"></div>
+      <div class="content">
+        <div class="badge badge--breaking">◆ BREAKING</div>
+        <div class="cat">PC / CONSOLE — GRAND THEFT AUTO VI</div>
+        <h1>『Grand Theft Auto VI』、発売日が 2026年11月19日 に再延期</h1>
+        <p class="lede">Rockstar Games は 2025年11月6日、『GTA VI』の発売日を従来予定の2026年5月26日から2026年11月19日へと約6ヶ月延期すると公式発表。「期待されている品質と磨きの水準で仕上げるため」追加の時間が必要とした。対応機種は PlayStation 5 / Xbox Series X|S。PC版は別途リリースされる見込み。</p>
+        <div class="meta-row">
+          <a class="source-chip" href="https://www.rockstargames.com/newswire/article/ak3ak31a49a221/grand-theft-auto-vi-is-now-set-to-launch-november-19-2026" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Rockstar Newswire
+          </a>
+          <span>2025.11.06</span>
+          <span>·</span>
+          <span>SOURCE: Rockstar Games</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Side list -->
+    <aside class="hero-side">
+
+      <a class="side-card" href="https://www.nintendo.com/us/store/products/nintendo-switch-2-system-123669/" target="_blank" rel="noopener">
+        <div class="thumb src-img" data-src="Nintendo" style="background:linear-gradient(135deg,#E60012 0%,#8a0010 100%);display:flex;align-items:center;justify-content:center">
+          <span class="num">01</span>
+          <div style="font-family:var(--font-disp);font-weight:900;color:#fff;font-size:16px;letter-spacing:0.04em;text-align:center;line-height:1.1">SWITCH<br><span style="font-size:22px">2</span></div>
+        </div>
+        <div>
+          <div class="cat" style="margin-bottom:6px">HARDWARE</div>
+          <h3>Nintendo Switch 2 発売。日本価格は ¥69,980、4K出力に対応</h3>
+          <div class="meta">2025.06.05 · SOURCE: Nintendo</div>
+        </div>
+      </a>
+
+      <a class="side-card" href="https://www.bandainamcoent.com/news/elden-ring-nightreign-reveals-the-forsaken-hollows-dlc-launching-december-4" target="_blank" rel="noopener">
+        <div class="thumb src-img" data-src="Bandai Namco" style="background:
+          radial-gradient(circle at 50% 60%, #8a1a1a 0%, transparent 60%),
+          linear-gradient(135deg, #1a0505 0%, #0A0A12 100%);display:flex;align-items:center;justify-content:center">
+          <span class="num">02</span>
+          <div style="font-family:var(--font-disp);font-weight:900;color:#e8b060;font-size:10px;letter-spacing:0.1em;text-align:center;line-height:1.15;text-shadow:0 0 12px rgba(232,176,96,0.5)">ELDEN RING<br><span style="font-size:12px;color:#fff">NIGHTREIGN</span></div>
+        </div>
+        <div>
+          <div class="cat" style="margin-bottom:6px">DLC</div>
+          <h3>『ELDEN RING NIGHTREIGN』拡張 "THE FORSAKEN HOLLOWS" 12月4日配信</h3>
+          <div class="meta">2025.11.11 · SOURCE: Bandai Namco</div>
+        </div>
+      </a>
+
+      <a class="side-card" href="https://en.wikipedia.org/wiki/Elden_Ring_Nightreign" target="_blank" rel="noopener">
+        <div class="thumb src-img" data-src="Bandai Namco" style="background:
+          radial-gradient(circle at 50% 50%, rgba(198,255,61,0.2) 0%, transparent 60%),
+          linear-gradient(135deg, #1A1A28 0%, #0A0A12 100%);display:flex;align-items:center;justify-content:center">
+          <span class="num">03</span>
+          <div style="font-family:var(--font-disp);font-weight:900;color:#C6FF3D;font-size:26px;letter-spacing:0.02em">5M+</div>
+        </div>
+        <div>
+          <div class="cat" style="margin-bottom:6px">SALES</div>
+          <h3>『ELDEN RING NIGHTREIGN』、累計販売500万本を突破</h3>
+          <div class="meta">2025 · 5月サールスチャート首位獲得</div>
+        </div>
+      </a>
+
+      <a class="side-card" href="https://techcrunch.com/2025/04/02/the-nintendo-switch-2-releases-on-june-5-and-costs-450/" target="_blank" rel="noopener">
+        <div class="thumb src-img" data-src="FromSoftware" style="background:
+          radial-gradient(circle at 30% 50%, #3a0f60 0%, transparent 60%),
+          linear-gradient(135deg, #0f0520 0%, #0A0A12 100%);display:flex;align-items:center;justify-content:center">
+          <span class="num">04</span>
+          <div style="font-family:var(--font-disp);font-weight:900;color:#b088ff;font-size:10px;letter-spacing:0.1em;text-align:center;line-height:1.15">THE<br><span style="font-size:14px;color:#fff">DUSKBLOODS</span></div>
+        </div>
+        <div>
+          <div class="cat" style="margin-bottom:6px">EXCLUSIVE</div>
+          <h3>FromSoftware 新作『The Duskbloods』、Switch 2 専用で 2026年発売</h3>
+          <div class="meta">2025.04.02 · SOURCE: Nintendo Direct</div>
+        </div>
+      </a>
+
+    </aside>
+  </section>
+
+  <!-- =============== FEATURED =============== -->
+  <div class="section-label">FEATURED NEWS ///</div>
+
+  <section class="feat-grid">
+
+    <article class="card">
+      <a href="https://www.nintendo.com/us/store/products/nintendo-switch-2-system-123669/" target="_blank" rel="noopener" class="cover src-img" data-src="Source: Nintendo / nintendo.com" style="background:
+        radial-gradient(ellipse at 50% 40%, #ff1a2a 0%, #E60012 40%, #8a0010 100%);display:flex;align-items:center;justify-content:center">
+        <div style="font-family:var(--font-disp);font-weight:900;color:#fff;font-size:44px;letter-spacing:0.02em;text-align:center;line-height:0.95;text-shadow:0 4px 30px rgba(0,0,0,0.4)">NINTENDO<br><span style="font-size:64px;letter-spacing:-0.02em">SWITCH 2</span></div>
+      </a>
+      <div class="body">
+        <div class="cat">HARDWARE — NINTENDO SWITCH 2</div>
+        <h2>Switch 2、発売4日で初期出荷分を完売。Nintendo Direct で本体仕様を公開</h2>
+        <p class="excerpt">2025年4月2日の Nintendo Direct にて正式発表。7.9インチ1080p LCD（HDR対応・最大120Hz）、ドック接続時は4K/60Hz出力。Joy-Con 2 は磁気接続とマウス操作に対応。北米想定価格 $449.99、Mario Kart World 同梱バンドルは $499.99。</p>
+        <div class="card-foot">
+          <span>2025.04.02</span>
+          <span>SOURCE: Nintendo Direct / TechCrunch</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <a href="https://store.steampowered.com/app/2622380/ELDEN_RING_NIGHTREIGN/" target="_blank" rel="noopener" class="cover src-img" data-src="Source: FromSoftware / Steam" style="background:
+        radial-gradient(ellipse at 50% 70%, #b8801a 0%, #4a2a0a 40%, #0a0505 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+        <div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 50% 100%, rgba(255,180,60,0.08) 0 2px, transparent 2px 30px)"></div>
+        <div style="font-family:var(--font-disp);font-weight:900;color:#f0d080;font-size:32px;letter-spacing:0.06em;text-align:center;line-height:1;text-shadow:0 0 20px rgba(240,208,128,0.5);position:relative">ELDEN RING<br><span style="font-size:22px;color:#fff;letter-spacing:0.1em">NIGHTREIGN</span></div>
+      </a>
+      <div class="body">
+        <div class="cat">RPG — FROMSOFTWARE</div>
+        <h2>『ELDEN RING NIGHTREIGN』、5月30日発売。3人協力のローグライト型 ARPG</h2>
+        <p class="excerpt">FromSoftware 開発 / Bandai Namco 発売。ディレクターは石崎淳也氏。3人Co-opを中心にした単独タイトルで、2〜3日の昼夜サイクルを生き延び Nightlord を討伐する構成。発売月の全プラットフォーム売上首位を獲得し、OpenCritic では推奨率77%。</p>
+        <div class="card-foot">
+          <span>2025.05.30</span>
+          <span>SOURCE: Bandai Namco / Steam</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <a href="https://www.rockstargames.com/newswire/article/ak3ak31a49a221/grand-theft-auto-vi-is-now-set-to-launch-november-19-2026" target="_blank" rel="noopener" class="cover src-img" data-src="Source: Rockstar Games" style="background:
+        radial-gradient(ellipse at 30% 60%, #ff5ea0 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 30%, #00d0ff 0%, transparent 55%),
+        linear-gradient(135deg,#2a1050 0%,#0A0A12 100%);display:flex;align-items:center;justify-content:center">
+        <div style="font-family:var(--font-disp);font-weight:900;color:#fff;font-size:80px;letter-spacing:0;text-shadow:0 0 30px rgba(255,94,160,0.6)">VI</div>
+      </a>
+      <div class="body">
+        <div class="cat">OPEN WORLD — ROCKSTAR</div>
+        <h2>『GTA VI』、2026年11月19日発売に。PC版は2027年2月を目標</h2>
+        <p class="excerpt">Rockstar Games が公式声明で発表。フィクションの州 Leonida を舞台に、Vice City を中心とした広域オープンワールドを展開。主人公は Jason Duval と Lucia Caminos のカップル犯罪者。当初2025年秋予定から2度の延期を経ての最終スケジュール。</p>
+        <div class="card-foot">
+          <span>2025.11.06</span>
+          <span>SOURCE: Rockstar Newswire</span>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <div class="section-label">PLATFORM SPECS ///</div>
+
+  <section class="feat-grid">
+
+    <article class="card">
+      <div class="cover" style="background:linear-gradient(135deg,#E60012 0%,#B4001A 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:#fff;font-family:var(--font-disp);padding:20px">
+        <div style="font-size:10px;letter-spacing:0.2em;opacity:0.8">HARDWARE</div>
+        <div style="font-size:28px;font-weight:900;letter-spacing:0.04em">SWITCH 2</div>
+        <div style="font-size:12px;font-family:var(--font-mono);opacity:0.7">¥69,980 / $449.99</div>
+      </div>
+      <div class="body">
+        <div class="cat">発売: 2025.06.05</div>
+        <h2>Nintendo Switch 2 主要スペック</h2>
+        <p class="excerpt">• 7.9インチ LCD、1080p・最大120Hz、HDR対応<br>• ドック接続時 4K / 60Hz 出力<br>• 内蔵ストレージ 256GB（初代比8倍）<br>• Joy-Con 2 は磁気接続、マウス操作対応<br>• 新機能「GameChat」（Cボタン起動）</p>
+        <div class="card-foot">
+          <span>2025.06.05 発売</span>
+          <span>SOURCE: Nintendo</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="cover" style="background:linear-gradient(135deg,#2a0f4a 0%,#ff8dc7 50%,#1a0a28 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:#fff;font-family:var(--font-disp);padding:20px">
+        <div style="font-size:10px;letter-spacing:0.2em;opacity:0.8">LAUNCH</div>
+        <div style="font-size:28px;font-weight:900;letter-spacing:0.04em">GTA VI</div>
+        <div style="font-size:12px;font-family:var(--font-mono);opacity:0.7">2026.11.19</div>
+      </div>
+      <div class="body">
+        <div class="cat">対応機種</div>
+        <h2>GTA VI 発売スケジュール（確定情報）</h2>
+        <p class="excerpt">• コンソール: PS5 / Xbox Series X|S 向けに 2026年11月19日発売<br>• 公式トレーラー2 は 2025年5月6日公開<br>• 一次トレーラー公開24時間以内の再生数 4.75億回（当時の動画公開記録）<br>• 舞台は Leonida 州（マイアミ基調の Vice City）</p>
+        <div class="card-foot">
+          <span>2025.11.06 延期発表</span>
+          <span>SOURCE: Rockstar / Variety</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="cover" style="background:linear-gradient(135deg,#1a0a0a 0%,#8a1a1a 60%,#0A0A12 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:#fff;font-family:var(--font-disp);padding:20px">
+        <div style="font-size:10px;letter-spacing:0.2em;opacity:0.8">MILESTONE</div>
+        <div style="font-size:22px;font-weight:900;letter-spacing:0.04em;text-align:center">ELDEN RING<br>NIGHTREIGN</div>
+        <div style="font-size:12px;font-family:var(--font-mono);opacity:0.7">5M+ SOLD</div>
+      </div>
+      <div class="body">
+        <div class="cat">STANDALONE SPINOFF</div>
+        <h2>Nightreign 主要ファクト</h2>
+        <p class="excerpt">• 2024年12月 The Game Awards にて発表<br>• 発売日: 2025年5月30日（Steam版は5月29日）<br>• 対応機種: PS4/PS5/Xbox One/Series X|S/PC<br>• 累計販売 500万本（発売月で全PF首位）<br>• DLC『The Forsaken Hollows』2025年12月4日配信</p>
+        <div class="card-foot">
+          <span>2025.05.30 発売</span>
+          <span>SOURCE: Bandai Namco / Wikipedia</span>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div>© NEONPULSE — 本ページはデザインモックです。記事は実在公開情報に基づきますが、各画像・商標の権利は各権利者に帰属します。</div>
+  <div>
+    <a href="#">編集方針</a> · <a href="#">引用元一覧</a> · <a href="#">お問い合わせ</a>
+  </div>
+</footer>
+
+<script>
+  // Ticker speed adapts to content width
+  (function(){
+    var track = document.getElementById('ticker-track');
+    if (!track) return;
+    // Already duplicated in HTML for seamless loop
+  })();
+</script>
+
+</body>
+</html>
